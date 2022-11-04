@@ -301,6 +301,8 @@ enb1.component_id = params.enb1_node
 enb1.disk_image = SRSLTE_IMG
 enb1_s1_if = enb1.addInterface("enb1_s1_if")
 enb1_s1_if.addAddress(rspec.IPv4Address("192.168.1.2", "255.255.255.0"))
+enb1_x2_if = enb1.addInterface("enb1_x2_if")
+enb1_x2_if.addAddress(rspec.IPv4Address("192.168.1.20", "255.255.255.0"))
 enb1.Desire("rf-controlled", 1)
 enb1_ue_rf = enb1.addInterface("enb1_ue_rf")
 enb1.addService(rspec.Execute(shell="bash", command=DEPLOY_SRS))
@@ -313,6 +315,8 @@ enb2.component_id = params.enb2_node
 enb2.disk_image = SRSLTE_IMG
 enb2_s1_if = enb2.addInterface("enb2_s1_if")
 enb2_s1_if.addAddress(rspec.IPv4Address("192.168.1.3", "255.255.255.0"))
+enb2_x2_if = enb2.addInterface("enb2_x2_if")
+enb2_x2_if.addAddress(rspec.IPv4Address("192.168.1.30", "255.255.255.0"))
 enb2.Desire("rf-controlled", 1)
 enb2_ue_rf = enb2.addInterface("enb2_ue_rf")
 enb2.addService(rspec.Execute(shell="bash", command=DEPLOY_SRS))
@@ -326,6 +330,12 @@ link.addInterface(enb2_s1_if)
 link.link_multiplexing = True
 link.vlan_tagging = True
 link.best_effort = True
+link1 = request.LAN("lan1")
+link1.addInterface(enb1_x2_if)
+link1.addInterface(enb2_x2_if)
+link1.link_multiplexing = True
+link1.vlan_tagging = True
+link1.best_effort = True
 
 # Create RF links between the UE and eNodeBs
 rflink1 = request.RFLink("rflink1")
