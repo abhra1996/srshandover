@@ -9,14 +9,14 @@ fi
 
 cd $SRCDIR
 git clone $SRS_REPO srsran
-cd srsran
-mkdir build
-cd build
-cmake ../
-make -j `nproc`
-sudo make install
-sudo ldconfig
-sudo srsran_install_configs.sh service
-sudo cp /local/repository/etc/srsran/* /etc/srsran/
+# cd srsran
+# mkdir build
+# cd build
+# cmake ../
+# make -j `nproc`
+# sudo make install
+# sudo ldconfig
+# sudo srsran_install_configs.sh service
+# sudo cp /local/repository/etc/srsran/* /etc/srsran/
 
-touch $SRCDIR/srs-setup-complete
+# touch $SRCDIR/srs-setup-complete
